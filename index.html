@@ -3,13 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>Piaget Almada</title>
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body { margin: 0; }
         progress { position: absolute; }
+        #text {
+            position: absolute;
+            color: white;
+            text-transform: uppercase;
+            /* background-color: white; */
+            padding: 5px;
+            font-size: 1em;
+            font-weight: bolder;
+        }
     </style>
   </head>
   <body>
-    <progress value="0" max="100"></progress>
-    <script src="index.js" type="module"></script>
+    <section id="text"></section>
+    <section id="loading-screen">
+        <div id="loader"></div>
+    </section>
+    <script src="main.js" type="module"></script>
   </body>
 </html>
