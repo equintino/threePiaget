@@ -86,10 +86,18 @@ function mouseInteraction() {
     } );
 
     window.addEventListener( 'pointermove', onPointerMove );
+    window.addEventListener( 'mouseover', mouseover )
 
     function onPointerMove( event ) {
         if ( event.isPrimary ) {
             checkIntersection( event.clientX, event.clientY );
+        }
+    }
+
+    function mouseover() {
+        const info = document.querySelector('#text')
+        info.onMouseLeave = () => {
+            console.log('leave')
         }
     }
 
@@ -114,15 +122,45 @@ function mouseInteraction() {
                     case 'Base002':
                         msg = popup.gotinha2
                 }
-                info.innerText = msg
+                info.innerHTML = msg
+                fadeIn(info)
             }
             else {
-                info.innerText = ''
+                fadeOut(info)
             }
         } else {
             intersection.intersects = false;
         }
     }
+}
+
+function fadeOut(element) {
+    const fadeout = setInterval(() => {
+        if (!element.style.opacity) {
+            element.style.opacity = 1
+        }
+        if (element.style.opacity < 0) {
+            element.style.opacity = parseFloat(element.style.opacity) - 0.05
+        }
+        else {
+            clearInterval(fadeout)
+            element.innerHTML = ""
+        }
+    }, 1000)
+}
+
+function fadeIn(domElement) {
+    const fadein = setInterval(() => {
+        if (!domElement.style.opacity) {
+            domElement.style.opacity = 0
+        }
+        if (domElement.style.opacity < 1) {
+            domElement.style.opacity = parseFloat(domElement.style.opacity) + 0.1
+        }
+        else {
+            clearInterval(fadein)
+        }
+    }, 200)
 }
 
 function onTransitionEnd( event ) {
